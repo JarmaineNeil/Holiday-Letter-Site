@@ -1,0 +1,78 @@
+body
+
+h1{
+    font-family: verdana;
+    font-size: 3em;
+    text-align: center;
+}
+
+#startBtnContainer{
+    text-align: center;
+}
+
+.btn{
+    width: 9em;
+    height: 3em;
+    border-radius: 30em;
+    font-size: 15px;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 6px 6px 12px #c5c5c5,
+    -6px -6px 12px #ffffff;
+
+    /* background-color:#6eac71 ; */
+  
+}
+
+.btn::before{
+    content: '';
+    width: 0;
+    height: 3em;
+    border-radius: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #c62828 0%, #f9a825 100% );
+    /* background-image: linear-gradient(to right, #2e7d32, #fbc02d); */
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
+
+.btn:hover::before{
+    width: 9em;
+}
+
+#peng{
+    text-align: center;
+}
+
+#bg-video {
+  position: fixed;       /* Keep it in the background */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* Fill screen without stretching */
+  z-index: -1;           /* Behind other content */
+  opacity: 0.4;          /* Adjust opacity (0 = invisible, 1 = fully visible) */
+}
+
+
+/* Page content styling */
+.content {
+  position: relative;    /* So it sits above the video */
+  color: white;          /* Text color */
+  padding: 50px;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
