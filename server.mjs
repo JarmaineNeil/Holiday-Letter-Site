@@ -48,15 +48,16 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 app.post("/send-letter", async (req, res) => {
-  const { name, email } = req.body;
+  try {
+    const { name, email } = req.body;
 
-  if (!name || !email) {
-    return res.status(400).json({ error: "Missing fields" });
-  }
+    if (!name || !email) {
+      return res.status(400).json({ error: "Missing fields" });
+    }
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-  const prompt = `
+    const prompt = `
 Write a warm Christmas and New Year holiday letter/poem.
 
 Recipient: ${name}
@@ -68,18 +69,31 @@ End with a warm sign-off.
 Do not include questions or suggestions.
 `;
 
-  const letter = (await model.generateContent(prompt)).response.text();
+    const result = await model.generateContent(prompt);
+    const letter = result.response.text();
 
-  await resend.emails.send({
-    from: `Holiday Letters <${process.env.FROM_EMAIL}>`,
-    to: email,
-    subject: "A Holiday Letter Just for You 🎄",
-    text: letter
-  });
+    await resend.emails.send({
+      from: `Holiday Letters <${process.env.FROM_EMAIL}>`,
+      to: email,
+      subject: "A Holiday Letter Just for You 🎄",
+      text: letter
+    });
 
-  res.json({ success: true });
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error("SERVER ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`✅ Server running on http://localhost:${PORT}`);
+});
+
+// keep process alive (debug safety)
+process.on("exit", (code) => {
+  console.log("❌ Process exiting with code:", code);
 });
