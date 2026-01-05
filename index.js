@@ -26,6 +26,13 @@ start.addEventListener("click", async (e) => {
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
 
+
+  console.log("Name:", name);
+  console.log("Email:", email);
+
+  alert("Check the console 👀");
+
+
   if (!name || !email) {
     alert("Please fill out all fields");
     return;
@@ -52,11 +59,6 @@ start.addEventListener("click", async (e) => {
     alert("Server error");
   }
 });
-
-
-
-
-
 
 
 
