@@ -6,9 +6,9 @@ import cors from "cors";
 
 dotenv.config();
 
-// console.log("GEMINI:", process.env.GEMINI_API_KEY ? "OK" : "MISSING");
-// console.log("RESEND:", process.env.RESEND_API_KEY ? "OK" : "MISSING");
-// console.log("FROM:", process.env.FROM_EMAIL);
+console.log("GEMINI:", process.env.GEMINI_API_KEY ? "OK" : "MISSING");
+console.log("RESEND:", process.env.RESEND_API_KEY ? "OK" : "MISSING");
+console.log("FROM:", process.env.FROM_EMAIL);
 
 
 
@@ -55,29 +55,69 @@ app.post("/send-letter", async (req, res) => {
       return res.status(400).json({ error: "Missing fields" });
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    //const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const prompt = `
-Write a warm Christmas and New Year holiday letter/poem.
+Write a warm post-Christmas and New Year holiday letter/poem.
 
 Recipient: ${name}
 Tone: heartfelt, personal, slightly nostalgic
-Write as a close friend.
-Avoid clichés.
-About 209–300 words.
+
+create a short poem
+
+this is my sister
+thank her for the scented candle
+she is shit at dota 2, let her know that
+
+Avoid clichés. 
+Use his/her name frequently but not too much.
+About 150-200 words.
 End with a warm sign-off.
 Do not include questions or suggestions.
+Sender: Pengwing
 `;
+// Write as a close friend.
+// i like her/his voice
+// thanks for the gaming sessions all night with full of laughter
 
-    const result = await model.generateContent(prompt);
-    const letter = result.response.text();
+
+
+   // const result = await model.generateContent(prompt);
+   const result = await genAI.models.generateContent({
+    model:"gemini-2.5-flash",
+    contents: prompt,
+   });
+
+   console.log("log: ", result.text)
+   const letter = result.text;
 
     await resend.emails.send({
-      from: `Holiday Letters <${process.env.FROM_EMAIL}>`,
+      from: process.env.FROM_EMAIL,
       to: email,
-      subject: "A Holiday Letter Just for You 🎄",
-      text: letter
+      subject: "A Letter Just for You ✉️",
+      text: letter,
+
     });
+
+ 
+      try {
+  const data = await resend.emails.send({
+    from: process.env.FROM_EMAIL,
+    to: "jarmaineemojica@gmail.com",
+    subject: "Debug Test",
+    text: letter,
+  });
+
+  console.log("RESEND OK:", data);
+} catch (err) {
+  console.error(
+    "RESEND ERROR:",
+    err?.response?.data || err
+  );
+}
+
+ 
+ 
 
     res.json({ success: true });
 
