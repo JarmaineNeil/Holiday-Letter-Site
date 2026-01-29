@@ -1,0 +1,9 @@
+add tone selector
+add from email input
+add special details input
+add ocassion selector
+
+add loading/ restrictor for consecutive inputs
+
+
+add email template

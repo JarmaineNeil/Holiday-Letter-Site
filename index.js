@@ -30,6 +30,7 @@ start.addEventListener("click", async (e) => {
   console.log("Name:", name);
   console.log("Email:", email);
 
+
   alert("Check the console 👀");
 
 

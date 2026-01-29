@@ -57,22 +57,31 @@ app.post("/send-letter", async (req, res) => {
 
     //const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
+    const toneArr = ['loving', 'goofy', 'corny', 'funny', 'serious'];
+    
+    function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+    }
+
+    
+    let randomTone = getRandomInt(toneArr.length);
+    
+    let selectedTone = toneArr[randomTone];
+
+   
+
     const prompt = `
 Write a warm post-Christmas and New Year holiday letter/poem.
 
 Recipient: ${name}
-Tone: heartfelt, personal, slightly nostalgic
+Tone: ${selectedTone}
 
-create a short poem
-
-this is my sister
-thank her for the scented candle
-she is shit at dota 2, let her know that
-
+Keep it simple english, add a bit of tagalog
 Avoid clichés. 
 Use his/her name frequently but not too much.
-About 150-200 words.
+About 150-200 words, add a short poem
 End with a warm sign-off.
+
 Do not include questions or suggestions.
 Sender: Pengwing
 `;
@@ -88,6 +97,7 @@ Sender: Pengwing
     contents: prompt,
    });
 
+   console.log('tone: ', selectedTone)
    console.log("log: ", result.text)
    const letter = result.text;
 
