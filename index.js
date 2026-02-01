@@ -1,6 +1,6 @@
 const start = document.getElementById('startBtn');
 
-
+const cust = document.getElementById('customBtn');
 
 
 // BLINKING HOODIE PENG SCRIPT
@@ -62,7 +62,55 @@ start.addEventListener("click", async (e) => {
 });
 
 
+cust.addEventListener("click", async (e) => {
+  e.preventDefault();
 
+  const tone = document.getElementById("tone").value;
+  const senderEmail = document.getElementById("fromEmail").value;
+  const recName = document.getElementById("recName").value;
+  const relationship = document.getElementById("rel").value;
+  const occasion = document.getElementById("occ").value;
+  const details = document.getElementById("specialDet").value;
+  const recEmail = document.getElementById("recEmail").value;
+
+
+  
+
+
+  if (!tone || !senderEmail || !recName || !relationship || !occasion || !details || !recEmail) {
+    alert("Please fill out all fields");
+    return;
+  }
+  console.log("tone:", tone);
+    console.log("senderMail:", senderEmail);
+  console.log("recName:", recName);
+  console.log("relationship:", relationship);
+  console.log("occasion:", occasion);
+  console.log("special detail:", details);
+  console.log("rec Email:", recEmail);
+  alert("Check the console 👀");
+
+  try {
+    const res = await fetch("http://localhost:3000/send-custom-letter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ tone, senderEmail, recName, relationship, occasion, details, recEmail })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      alert("Holiday letter sent! 🎄");
+    } else {
+      alert("Something went wrong");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Server error");
+  }
+});
 
 
 
@@ -172,3 +220,16 @@ start.addEventListener("click", async (e) => {
 //   }
 // };
 
+
+const welcomeForm = document.getElementById("welcomeForm");
+const letterForm = document.getElementById("letterForm");
+const radios = document.querySelectorAll('input[name="mode"]');
+
+radios.forEach(radio => {
+  radio.addEventListener("change", () => {
+    const isWelcome = radio.value === "welcome";
+
+    welcomeForm.hidden = !isWelcome;
+    letterForm.hidden = isWelcome;
+  });
+});

@@ -1,3 +1,6 @@
+random or tailored mode (send/ receive)
+
+
 add tone selector
 add from email input
 add special details input
@@ -7,3 +10,9 @@ add loading/ restrictor for consecutive inputs
 
 
 add email template
+
+
+
+
+
+server.mjs differentiate /send letter for welcome form and custom letter => index.js

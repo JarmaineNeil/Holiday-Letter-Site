@@ -76,6 +76,8 @@ Write a warm post-Christmas and New Year holiday letter/poem.
 Recipient: ${name}
 Tone: ${selectedTone}
 
+say affirmations and all that crap
+
 Keep it simple english, add a bit of tagalog
 Avoid clichés. 
 Use his/her name frequently but not too much.
@@ -104,6 +106,99 @@ Sender: Pengwing
     await resend.emails.send({
       from: process.env.FROM_EMAIL,
       to: email,
+      subject: "A Letter Just for You ✉️",
+      text: letter,
+
+    });
+
+ 
+      try {
+  const data = await resend.emails.send({
+    from: process.env.FROM_EMAIL,
+    to: "jarmaineemojica@gmail.com",
+    subject: "Debug Test",
+    text: letter,
+  });
+
+  console.log("RESEND OK:", data);
+} catch (err) {
+  console.error(
+    "RESEND ERROR:",
+    err?.response?.data || err
+  );
+}
+
+ 
+ 
+
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error("SERVER ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/send-custom-letter", async (req, res) => {
+  try {
+    const { tone, senderEmail, recName, relationship, occasion, details, recEmail } = req.body;
+
+    if (!tone || !senderEmail || !recName || !relationship || !occasion || !details || !recEmail) {
+      return res.status(400).json({ error: "Missing fields" });
+    }
+
+    //const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+    // const toneArr = ['loving', 'goofy', 'corny', 'funny', 'serious'];
+    
+    // function getRandomInt(max) {
+    // return Math.floor(Math.random() * max);
+    // }
+
+    
+    // let randomTone = getRandomInt(toneArr.length);
+    
+    // let selectedTone = toneArr[randomTone];
+
+   
+
+    const prompt = `
+Write a warm for ${occasion}.
+
+Recipient name: ${recName}
+Tone: ${tone}
+
+This is my relationship to the recipient: ${relationship}
+
+
+Keep it simple english
+Avoid clichés. 
+Use his/her name frequently but not too much.
+About 150-200 words, add a short poem
+End with a warm sign-off.
+Special detail: ${details}
+
+Do not include questions or suggestions.
+Sender: ${recEmail}
+`;
+// Write as a close friend.
+// i like her/his voice
+// thanks for the gaming sessions all night with full of laughter
+
+
+
+   // const result = await model.generateContent(prompt);
+   const result = await genAI.models.generateContent({
+    model:"gemini-2.5-flash",
+    contents: prompt,
+   });
+
+   console.log("log: ", result.text)
+   const letter = result.text;
+
+    await resend.emails.send({
+      from: process.env.FROM_EMAIL,
+      to: recEmail,
       subject: "A Letter Just for You ✉️",
       text: letter,
 

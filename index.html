@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="style1.css">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon/android-chrome-192x192.png" type="image/x-icon">
 </head>
 
 <body>
+
 
     <video autoplay muted loop id="bg-video">
         <source src="videos\cropped ai gen vid.mp4" type="video/mp4">
@@ -20,35 +22,87 @@
     </video>
 
     <br><br><br>
-    <div class="form-container">
-        <form>
-            <h2>Welcome!</h2>
-             <div id="startBtnContainer">
-        <!-- <h1 id="h1">Welcome!</h1> -->
+    <div class="mode-switch">
+        <label>
+            Receive <input type="radio" name="mode" value="welcome" checked>
+        </label>
+        <label>
+            Send Letter <input type="radio" name="mode" value="letter">
+        </label>
 
-        <div id="peng">
-            <img
-                src="penguin pics/hoodie_peng-removebg-preview.png"
-                id="blinkImg"
-                width="188px"
-                height="169px"
-            >
-            <pre>I hope you're having a great day!
-                    - Pengwing </pre>
-        </div>
-        <br><br>
 
-        
-            <input id="name" type="text" placeholder="Name" required>
-            <input  id="email" type="email" placeholder="Email" required>
-
-            <!-- <button type="submit">Submit</button> -->
-            <button type="submit" class="btn" id="startBtn">Confirm</button>
-
-            
     </div>
+
+    <div class="form-container" id="formContainer">
+
+        <form id="welcomeForm">
+
+
+            <h2>Welcome!</h2>
+            <div id="startBtnContainer">
+                <!-- <h1 id="h1">Welcome!</h1> -->
+
+                <div id="peng">
+                    <img src="penguin pics/hoodie_peng-removebg-preview.png" id="blinkImg" width="188px" height="169px">
+                    <pre>I hope you're having a great day!
+                    - Pengwing </pre>
+                </div>
+                <br><br>
+
+
+                <input id="name" type="text" placeholder="Name" required>
+                <input id="email" type="email" placeholder="Email" required>
+
+                <!-- <button type="submit">Submit</button> -->
+                <button type="submit" class="btn" id="startBtn">Confirm</button>
+
+
+            </div>
+        </form>
+
+        <form id="letterForm" hidden>
+
+            <h2>Custom Letter</h2>
+            <div id="peng">
+                <img src="penguin pics/hoodie_peng-removebg-preview.png" id="blinkImg" width="188px" height="169px">
+                <pre>I hope you're having a great day!
+                    - Pengwing </pre>
+            </div>
+
+            <select id ="tone"required>
+                <option value="" id="tone">Select tone</option>
+                <option>Romantic</option>
+                <option>Friendly</option>
+                <option>Funny</option>
+                <option>Professional</option>
+            </select>
+
+            <div class="flex-container1">
+                <div class="sender-name">
+                <input placeholder="Sender name" id="fromEmail" required>
+                </div>
+                <div class="tooltip">?
+                    <span class="tooltiptext">Name of the sender</span>
+                </div>
+            </div>
+
+            <input type="text" placeholder="Recipient name" id="recName" required>
+            <input type="text" placeholder="Relationship" id="rel" required>
+            <input type="text" placeholder="Occasion" id="occ" required>
+
+
+            <textarea id="specialDet" placeholder="Special details"></textarea>
+
+            <input type="email" placeholder="Recipient email" id="recEmail" required>
+
+            <button class="btn" id="customBtn">Submit</button>
         </form>
     </div>
+
+
+
+
+
     <div class="content">
 
         <div id="myModal" class="modal">
@@ -60,13 +114,8 @@
 
                     <!-- Character image -->
                     <div class="character">
-                        <img
-                            id="characterImg"
-                            src="penguin pics/greeting_peng-removebg-preview.png"
-                            alt="Character"
-                            width="126px"
-                            height="178px"
-                        >
+                        <img id="characterImg" src="penguin pics/greeting_peng-removebg-preview.png" alt="Character"
+                            width="126px" height="178px">
                     </div>
 
                     <div class="dialouge-wrapper">
@@ -82,7 +131,7 @@
                     <!-- Controls -->
                     <div class="dialogue-controls">
                         <button id="backBtn" class="backBtn">Back</button>
-                        
+
                         <button id="nextBtn" class="nextBtn">Next</button>
                     </div>
 
@@ -92,11 +141,14 @@
 
     </div>
 
-   
+
+
+
 
     <div class="signature">— Original art by: Zia</div>
 
     <script src="index.js"></script>
 
 </body>
+
 </html>

@@ -220,11 +220,20 @@ h1 {
   pointer-events: none; /* prevents clicking */
 }
 
+/* CUSTOM LETTER SELECTOR STYLE */
+
+
 /* FORM STYLE */
+.mode-switch {
+  height: 10vh;
+ display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /* Center form */
 .form-container {
-    height: 100vh;
+   
     display: flex;
     align-items: center;
     justify-content: center;
@@ -269,4 +278,34 @@ form button {
 
 form button:hover {
     background: #00a844;
+}
+
+
+
+.tooltip { position: relative; display: inline-block; }
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position above the text */
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.flex-container1 {
+  display: flex; /* Makes the child divs flex items and puts them side by side */
+  /* Optional: Adds space between the divs */
+  gap: 20px;
 }
