@@ -49,6 +49,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.post("/send-letter", async (req, res) => {
   try {
+  
     const { name, email } = req.body;
 
     if (!name || !email) {
@@ -232,10 +233,11 @@ Sender: ${recEmail}
   }
 });
 
-const PORT = 3000;
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
 
 // keep process alive (debug safety)
