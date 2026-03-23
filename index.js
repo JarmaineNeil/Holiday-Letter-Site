@@ -2,6 +2,7 @@ const start = document.getElementById('startBtn');
 
 const cust = document.getElementById('customBtn');
 
+const API_BASE = "https://letteraiemail-45ah.onrender.com";
 
 // BLINKING HOODIE PENG SCRIPT
 const img = document.getElementById("blinkImg");
@@ -40,7 +41,7 @@ start.addEventListener("click", async (e) => {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/send-letter", {
+   const res = await fetch(`${API_BASE}/send-custom-letter`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
