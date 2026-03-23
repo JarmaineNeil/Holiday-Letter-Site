@@ -4,6 +4,19 @@ const cust = document.getElementById('customBtn');
 
 const API_BASE = "https://letteraiemail-45ah.onrender.com";
 
+const welcomeForm = document.getElementById("welcomeForm");
+const letterForm = document.getElementById("letterForm");
+const radios = document.querySelectorAll('input[name="mode"]');
+
+radios.forEach(radio => {
+  radio.addEventListener("change", () => {
+    const isWelcome = radio.value === "welcome";
+
+    welcomeForm.hidden = !isWelcome;
+    letterForm.hidden = isWelcome;
+  });
+});
+
 // BLINKING HOODIE PENG SCRIPT
 const img = document.getElementById("blinkImg");
 
@@ -227,15 +240,3 @@ cust.addEventListener("click", async (e) => {
 // };
 
 
-const welcomeForm = document.getElementById("welcomeForm");
-const letterForm = document.getElementById("letterForm");
-const radios = document.querySelectorAll('input[name="mode"]');
-
-radios.forEach(radio => {
-  radio.addEventListener("change", () => {
-    const isWelcome = radio.value === "welcome";
-
-    welcomeForm.hidden = !isWelcome;
-    letterForm.hidden = isWelcome;
-  });
-});
