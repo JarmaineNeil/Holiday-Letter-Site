@@ -57,7 +57,7 @@ start.addEventListener("click", async (e) => {
   }
 
   try {
-   const res = await fetch(`${API_BASE}/send-custom-letter`, {
+   const res = await fetch(`${API_BASE}/send-letter`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -110,7 +110,7 @@ cust.addEventListener("click", async (e) => {
   alert("Check the console 👀");
 
   try {
-    const res = await fetch("http://localhost:3000/send-custom-letter", {
+    const res = await fetch(`${API_BASE}/send-custom-letter`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
