@@ -24,9 +24,12 @@ setInterval(() => {
 start.addEventListener("click", async (e) => {
   e.preventDefault();
 
+  if (welcomeForm.hidden) return; // 👈 IMPORTANT
+
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
 
+  
 
   console.log("Name:", name);
   console.log("Email:", email);
@@ -65,6 +68,8 @@ start.addEventListener("click", async (e) => {
 
 cust.addEventListener("click", async (e) => {
   e.preventDefault();
+
+    if (letterForm.hidden) return; // 👈 IMPORTANT
 
   const tone = document.getElementById("tone").value;
   const senderEmail = document.getElementById("fromEmail").value;
